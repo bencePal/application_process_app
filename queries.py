@@ -5,9 +5,7 @@ import config
 def firstname_lastname_mentors():
     cursor = config.connection().cursor()
     cursor.execute("""SELECT first_name, last_name FROM mentors;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def nickname_miskolc_mentors():
@@ -16,9 +14,7 @@ def nickname_miskolc_mentors():
         SELECT nick_name FROM mentors
         WHERE city = 'Miskolc'
         ;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def carol_and_her_hat():
@@ -27,9 +23,7 @@ def carol_and_her_hat():
         SELECT concat(first_name, ' ', last_name) AS full_name, phone_number FROM applicants
         WHERE first_name = 'Carol'
         ;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def another_girl_hat():
@@ -38,9 +32,7 @@ def another_girl_hat():
         SELECT concat(first_name, ' ', last_name) AS full_name, phone_number FROM applicants
         WHERE email LIKE '%@adipiscingenimmi.edu'
         ;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def add_new_applicant():
@@ -53,9 +45,7 @@ def add_new_applicant():
         SELECT * FROM applicants
         WHERE application_code = 54823
         ;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def change_phonenumber():
@@ -69,9 +59,7 @@ def change_phonenumber():
         SELECT phone_number FROM applicants
         WHERE first_name = 'Jemima' AND last_name = 'Foreman'
         ;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "")
+    return ui.print_query_table(cursor, "")
 
 
 def del_arsiano_and_his_friend():
@@ -86,9 +74,7 @@ def del_arsiano_and_his_friend():
 def all_data_mentors():
     cursor = config.connection().cursor()
     cursor.execute("""SELECT * FROM mentors ORDER BY id;""")
-    rows = list(cursor.fetchall())
-    rows.insert(0, [row[0] for row in cursor.description])
-    return ui.print_table(rows, "All the mentors")
+    return ui.print_query_table(cursor, "All the mentors")
 
 
 def all_data_applicants():
@@ -96,9 +82,5 @@ def all_data_applicants():
     cursor = config.connection().cursor()
     # run the query
     cursor.execute("""SELECT * FROM applicants ORDER BY id;""")
-    # Fetch the result of the last execution
-    rows = list(cursor.fetchall())
-    # insert column header
-    rows.insert(0, [row[0] for row in cursor.description])
     # return in table format
-    return ui.print_table(rows, "All the applicants")
+    return ui.print_query_table(cursor, "All the applicants")
