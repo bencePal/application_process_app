@@ -1,8 +1,14 @@
 from terminaltables import SingleTable
+import config
 
 
-def print_table(list_of_lists, title):
-    table = SingleTable(list_of_lists)
+def print_query_table(cursor, title):
+    # Fetch the result of the last execution
+    rows = list(cursor.fetchall())
+    # insert column header
+    rows.insert(0, [row[0] for row in cursor.description])
+    # table config
+    table = SingleTable(rows)
     table.inner_row_border = True
     table.title = title
     print(table.table)
