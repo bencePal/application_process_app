@@ -6,23 +6,23 @@ def choose():
     inputs = common.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
-        queries.firstname_lastname_mentors()
+        queries.firstname_lastname_mentors(common.get_cursor())
     elif option == "2":
-        queries.nickname_miskolc_mentors()
+        queries.nickname_miskolc_mentors(common.get_cursor())
     elif option == "3":
-        queries.carol_and_her_hat()
+        queries.carol_and_her_hat(common.get_cursor())
     elif option == "4":
-        queries.another_girl_hat()
+        queries.another_girl_hat(common.get_cursor())
     elif option == "5":
-        queries.add_new_applicant()
+        queries.add_new_applicant(common.get_cursor())
     elif option == "6":
-        queries.change_phonenumber()
+        queries.change_phonenumber(common.get_cursor())
     elif option == "7":
-        queries.del_arsiano_and_his_friend()
+        queries.del_arsiano_and_his_friend(common.get_cursor())
     elif option == "8":
-        queries.all_data_mentors()
+        queries.all_data_mentors(common.get_cursor())
     elif option == "9":
-        queries.all_data_applicants()
+        queries.all_data_applicants(common.get_cursor())
     elif option == "0":
         exit()
     else:

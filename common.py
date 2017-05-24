@@ -2,6 +2,16 @@ from terminaltables import SingleTable
 import config
 
 
+'''
+app process part 1
+'''
+
+
+def get_cursor():
+    cursor = config.connection().cursor()
+    return cursor
+
+
 def print_query_table(cursor, title):
     # Fetch the result of the last execution
     rows = list(cursor.fetchall())
@@ -33,3 +43,14 @@ def get_inputs(list_labels, title):
     print()
 
     return inputs
+
+
+'''
+app process part 2
+'''
+
+
+def fetch_data(cursor):
+    rows = list(cursor.fetchall())
+    rows.insert(0, [row[0] for row in cursor.description])
+    return rows

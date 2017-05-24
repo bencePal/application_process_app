@@ -12,8 +12,6 @@ def connection():
                                 dbname=connect_str["dbname"])
         conn.autocommit = True
         return conn
-        cursor = conn.cursor()
-        return cursor
     except Exception as e:
         print('Cannot connect')
         print(e)
