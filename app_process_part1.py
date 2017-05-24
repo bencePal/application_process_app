@@ -1,9 +1,9 @@
 import queries
-import ui
+import common
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
+    inputs = common.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
         queries.firstname_lastname_mentors()
@@ -40,7 +40,7 @@ def handle_menu():
                "all data from mentors table",
                "all data from applicants table"]
 
-    ui.print_menu("Main menu", options, "Exit program")
+    common.print_menu("Main menu", options, "Exit program")
 
 
 def main():
@@ -49,7 +49,7 @@ def main():
             handle_menu()
             choose()
         except Exception as err:
-                ui.print_error_message(err)
+                common.print_error_message(err)
 
 
 if __name__ == '__main__':

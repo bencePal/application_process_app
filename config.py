@@ -1,12 +1,19 @@
+import private_config
 import psycopg2
 
 
 def connection():
-    # setup connection string
-    connect_str = "dbname='' user='' host='localhost' password=''"
-    # use our connection values to establish a connection
-    conn = psycopg2.connect(connect_str)
-    # set autocommit option, to do every query when we call it
-    conn.autocommit = True
-    # return connection
-    return conn
+    try:
+        connect_str = private_config.my_connection()
+        # use our connection values to establish a connection
+        conn = psycopg2.connect(host=connect_str["host"],
+                                user=connect_str["user"],
+                                password=connect_str["passwd"],
+                                dbname=connect_str["dbname"])
+        conn.autocommit = True
+        return conn
+        cursor = conn.cursor()
+        return cursor
+    except Exception as e:
+        print('Cannot connect')
+        print(e)
