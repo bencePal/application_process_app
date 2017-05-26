@@ -32,5 +32,26 @@ def mentors_by_country_page():
     return render_template("page.html", title=title, table=query)
 
 
+@app.route("/contacts")
+def contacts_page():
+    title = "Contacts page"
+    query = common.fetch_data(queries.contacts(common.get_cursor()))
+    return render_template("page.html", title=title, table=query)
+
+
+@app.route("/applicants")
+def applicants_page():
+    title = "Applicants page"
+    query = common.fetch_data(queries.applicants(common.get_cursor()))
+    return render_template("page.html", title=title, table=query)
+
+
+@app.route("/applicants-and-mentors")
+def applicants_and_mentors_page():
+    title = "Applicants and mentors page"
+    query = common.fetch_data(queries.applicants_and_mentors_(common.get_cursor()))
+    return render_template("page.html", title=title, table=query)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

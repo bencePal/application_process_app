@@ -85,15 +85,6 @@ app process part 2
 '''
 
 
-# def mentors_and_schools(cursor):
-#     cursor.execute("""
-#         SELECT mentors.first_name, mentors.last_name, schools.name AS school_name, schools.country
-#         FROM mentors
-#         RIGHT JOIN schools ON mentors.id = schools.id
-#         ORDER BY mentors.id;
-#         """)
-#     return cursor
-
 def mentors_and_schools(cursor):
     cursor.execute("""
         SELECT mentors.first_name, mentors.last_name, schools.name AS school_name, schools.country
@@ -123,4 +114,39 @@ def mentors_by_country(cursor):
         ORDER BY schools.country;
         """)
     return cursor
-    
+
+
+def contacts(cursor):
+    cursor.execute("""
+        SELECT schools.name AS school_name, mentors.first_name, mentors.last_name
+        FROM mentors
+        JOIN schools ON schools.contact_person = mentors.id
+        ORDER BY schools.name;
+        """)
+    return cursor
+
+
+def applicants(cursor):
+    cursor.execute("""
+        SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date
+        FROM applicants
+        JOIN applicants_mentors ON applicants_mentors.applicant_id = applicants.id
+        WHERE applicants_mentors.creation_date > '2016-01-01'
+        ORDER BY applicants_mentors.creation_date DESC;
+        """)
+    return cursor
+
+
+def applicants_and_mentors_(cursor):
+    cursor.execute("""
+        SELECT applicants.first_name AS applicant_first_name,
+            applicants.application_code,
+            mentors.first_name AS mentor_first_name,
+            mentors.last_name AS mentor_last_name
+        FROM applicants
+        LEFT JOIN applicants_mentors ON applicants_mentors.applicant_id = applicants.id
+        LEFT JOIN mentors on applicants_mentors.mentor_id = mentors.id
+        ORDER BY applicants.id;
+        """)
+    return cursor
+
